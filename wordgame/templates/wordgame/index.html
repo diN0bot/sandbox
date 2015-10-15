@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Wordgame</title>
+	<!--
+	<link rel="stylesheet" href="https://googlesamples.github.io/web-fundamentals/samples/css/normalize.css">
+	<link rel="stylesheet" href="https://googlesamples.github.io/web-fundamentals/samples/css/main.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold" title="roboto">
+	<link rel="stylesheet" href="https://googlesamples.github.io/web-fundamentals/samples/css/base.css">
+	-->
+	<style>
+		body {
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.container {
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+		}
+		.board {
+			width: 100%;
+			/*padding-bottom: 100%;*/
+			/*overflow: hidden;
+			overflow-x: hidden;
+			overflow-y: hidden;*/
+		}
+		.tile {
+		    float: left;
+		    font-size: 10em;
+			text-align: center;
+			background: green url('{% static "img/tile.jpg" %}') no-repeat;
+		}
+	  	.selected {
+			background: yellow url('{% static "img/selectedTile3.jpg" %}') no-repeat;
+	  	}
+	  	.header, .footer {
+	  		font-size: 1.2em;
+	  		padding-left: 10px;
+	  		background: black;
+	  		color: white;
+	  		text-align: center;
+	  		height: 30px;
+	  	}
+	</style>
+	<script src="{% static "ext/jquery-2.1.4.min.js" %}"></script>
+	<script src="{% static "ext/hammer.min.js" %}"></script>
+	<script src="{% static "ext/lodash.js" %}"></script>
+	<script src="{% static "js/wordgame.js" %}"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header">Level: <span class="levelNumber"></span></div>
+		<div class="board"></div>
+		<div class="footer"><span class="selection"></span></div>
+	</div>
+</body>
+</html>
