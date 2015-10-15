@@ -5,6 +5,7 @@ function GameMaster(level, player) {
 	this.el = $(".board");
 	this.selectionEl = $(".selection");
 	this.selectedTiles = [];
+	this.foundWords = [];
 
 	this.board = this.createBoard();
 
@@ -16,10 +17,11 @@ function GameMaster(level, player) {
 		self.handleMove(event.center.x, event.center.y);
 	});
 	this.mc.on("panend pressup tap", function(event) {
-		if (self.isWord()) {
+		var isWord = self.checkSelection();
+		self.resetSelection(isWord);
+		if (self.foundWords.length === self.level.words.length) {
 			self.player.onSuccess();
 		}
-		self.resetSelection();
 	});
 };
 
@@ -61,7 +63,7 @@ GameMaster.prototype.createTile = function(letter, x, y, size) {
 	$(".footer").css("width", pixels*size);
 	$(".header").css("width", pixels*size);
 	return tile;
-}
+};
 
 GameMaster.prototype.handleMove = function(x, y) {
 	var self = this;
@@ -98,15 +100,27 @@ GameMaster.prototype.getSelectedWord = function() {
 	return this.selectedTiles.map(function(tile) { return tile.letter; }).join("");
 };
 
-GameMaster.prototype.isWord = function() {
+GameMaster.prototype.checkSelection = function() {
 	var selectedWord = this.getSelectedWord();
-	return this.level.words.reduce(function(previousValue, currentValue, index, array) {
-		return previousValue || currentValue === selectedWord;
-	}, false);
+	if (_.contains(this.foundWords, selectedWord)) {
+		return false;
+	}
+	for (var i = 0; i < this.level.words.length; i++) {
+		if (selectedWord === this.level.words[i]) {
+			this.foundWords.push(this.level.words[i]);
+			return true;
+		}
+	}
+	return false;
 };
 
-GameMaster.prototype.resetSelection = function() {
+GameMaster.prototype.resetSelection = function(removeEl) {
 	var self = this;
+	// TODO fix word deletion
+	// _.each(self.selectedTiles, function(tile) {
+	// 	tile.el.text("X");
+	// 	tile.el.remove();
+	// });
 	this.selectedTiles = [];
 	_.each(self.tiles(), function(tile) {
 		tile.el.removeClass("selected");
@@ -117,6 +131,7 @@ GameMaster.prototype.resetSelection = function() {
 GameMaster.prototype.cleanUpBoard = function() {
 	//this.mc.off("press panstart panmove");
 	//this.mc.off("panend pressup tap");
+	this.foundWords = [];
 	this.el.children().remove();
 	$(".tile").remove();
 };
