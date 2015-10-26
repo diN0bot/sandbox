@@ -1,3 +1,3 @@
 $(function() {
-	var lus = new Player("lus", new LevelKeeper(parseInt(2)));//localStorage.getItem("level"))));
+	var gameMaster = new GameMaster("lus", parseInt(2)); //localStorage.getItem("level"))));
 });
