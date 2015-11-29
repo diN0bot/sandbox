@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'wordgame',
     'data',
-    'api'
+    'api',
+    'sfgate'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,7 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'wordgame.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -103,3 +104,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DJANGO_LOG_LEVEL=DEBUG

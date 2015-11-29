@@ -1,0 +1,27 @@
+<html>
+  <head>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+	<script>
+		$(function() {
+			setTimeout( function() {
+				var $iframe = $("#sfgateiframe")[0];
+				var doc = $iframe.contentWindow.document;
+				var $body = $("body", doc);
+				var url = "http://sfgate.com body"
+
+				$body.load(url, function (response, status, xhr) {
+			        // var fullPageTextAsString = response.replace(/<iframe>.*<\/iframe/g, "");
+			        // var pageTextBetweenDelimiters = fullPageTextAsString.substring(fullPageTextAsString.indexOf("<jqueryloadmarkerstart />"), fullPageTextAsString.indexOf("<jqueryloadmarkerend />"));
+			        // return pageTextBetweenDelimiters;
+			    });
+			}, 1 );
+		});
+
+		var sfgateorig = "";
+	</script>
+  </head>
+  <body>
+  	<iframe id="sfgateiframe" style="width:1000px; height:800px;">
+  </body>
+</html>
